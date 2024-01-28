@@ -1,11 +1,13 @@
+import Swal from "sweetalert2";
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import useAxiosLocal from "../../hooks/useAxiosLocal";
 
 const BlogDetails = () => {
   const { id } = useParams();
   const axiosLocal = useAxiosLocal();
   const [blog, setBlog] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     axiosLocal
@@ -16,6 +18,34 @@ const BlogDetails = () => {
       });
   }, [axiosLocal, id]);
 
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      customClass: "swal-wide",
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes",
+      customClass: {
+        popup: "w-[300px]",
+      },
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosLocal
+          .delete(`/blog_delete/${id}`)
+          .then((res) => {
+            if (res.data.affectedRows > 0) {
+              navigate("/");
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
+    });
+  };
 
   return (
     <div className="w-full px-44 mx-auto">
@@ -27,7 +57,12 @@ const BlogDetails = () => {
           <h2 className="card-title">{blog[0]?.title}</h2>
           <p>{blog[0]?.description}</p>
           <div className="card-actions justify-end">
-            <Link to={`/blog_update/${blog[0]?.id}`} className="btn ">Update</Link>
+            <button onClick={() => handleDelete(blog[0]?.id)} className="btn">
+              Delete
+            </button>
+            <Link to={`/blog_update/${blog[0]?.id}`} className="btn ">
+              Update
+            </Link>
           </div>
         </div>
       </div>
