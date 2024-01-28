@@ -1,8 +1,10 @@
 import { useState } from "react";
+import useAuth from "../../hooks/useAuth";
 
 const DropDown = () => {
+  const {user} = useAuth()
   const [isShow, setIsShow] = useState(false);
-  const user = true;
+  
   return (
     <>
       <div className="dropdown dropdown-end">
@@ -12,7 +14,7 @@ const DropDown = () => {
         >
           <div className="w-10 rounded-full ">
             {user ? (
-              <img alt="user profile" src={user?.photoURL} />
+              <img alt="user profile" src={user?.image} />
             ) : (
               <img
                 alt="user profile"
@@ -27,11 +29,11 @@ const DropDown = () => {
           className="menu  absolute menu-sm dropdown-content  mt-36 z-[10] p-2 shadow bg-base-100 rounded-box w-52"
         >
           <li>
-            <a className="justify-between">{"user?.displayName"}</a>
+            <a className="justify-between">{user?.name}</a>
           </li>
 
           <li>
-            <p >logout comming soon</p>
+            <p>logout coming soon</p>
           </li>
         </ul>
       ) : (
