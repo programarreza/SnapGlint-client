@@ -4,6 +4,7 @@ import Home from "../Pages/Home/Home";
 import Register from "../Pages/Register/Register";
 import Login from "../Pages/Login/Login";
 import AddBlog from "../Pages/AddBlog/AddBlog";
+import BlogDetails from "../Pages/BlogDetails/BlogDetails";
 
 const Router = createBrowserRouter([
   {
@@ -26,6 +27,10 @@ const Router = createBrowserRouter([
         path: "add_blog",
         element: <AddBlog />,
       },
+      {
+        path: "blog_details/:id",
+        element: <BlogDetails/>
+      }
     ],
   },
 ]);

@@ -1,9 +1,11 @@
+import Blogs from "../../components/Blogs/Blogs";
 
 
 const Home = () => {
+	
 	return (
 		<div>
-		this is home 	
+		<Blogs/>
 		</div>
 	);
 };
