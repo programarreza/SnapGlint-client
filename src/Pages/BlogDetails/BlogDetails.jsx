@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import useAxiosLocal from "../../hooks/useAxiosLocal";
 
 const BlogDetails = () => {
   const { id } = useParams();
   const axiosLocal = useAxiosLocal();
-  const [blog, setBlog] = useState({});
+  const [blog, setBlog] = useState([]);
 
   useEffect(() => {
     axiosLocal
@@ -27,7 +27,7 @@ const BlogDetails = () => {
           <h2 className="card-title">{blog[0]?.title}</h2>
           <p>{blog[0]?.description}</p>
           <div className="card-actions justify-end">
-            
+            <Link to={`/blog_update/${blog[0]?.id}`} className="btn ">Update</Link>
           </div>
         </div>
       </div>
