@@ -1,7 +1,10 @@
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import useAxiosLocal from "../../hooks/useAxiosLocal";
+import toast from "react-hot-toast";
 
 const Login = () => {
+  const axiosLocal = useAxiosLocal();
 
   const {
     register,
@@ -11,14 +14,23 @@ const Login = () => {
   } = useForm();
 
   const onSubmit = async (data) => {
-    console.log(data);
-
-    // create user entry in the database
-    const userInfo = {
-      email: data.email,
-      password: data.password,
-    };
-    console.log(userInfo);
+    try {
+      console.log(data);
+      // create user entry in the database
+      const userInfo = {
+        email: data.email,
+        password: data.password,
+      };
+      console.log(userInfo);
+      const res = await axiosLocal.post("/login", userInfo);
+      if (res?.data === "Success") {
+        toast.success("Login Successfully ");
+      } else {
+        toast.error("Invalid user");
+      }
+    } catch (error) {
+      console.log("Error", error);
+    }
   };
 
   return (

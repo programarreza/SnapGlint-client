@@ -1,29 +1,43 @@
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { imageUpload } from "../../Utils/Utils";
+import useAxiosLocal from "../../hooks/useAxiosLocal";
+import { toast } from "react-hot-toast";
 
 const Register = () => {
+  const axiosLocal = useAxiosLocal();
+
   const {
     register,
-    reset,
+    // reset,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
   const onSubmit = async (data) => {
-    console.log(data);
-    const image = data.image[0];
-    const imageData = await imageUpload(image);
+    try {
+      console.log(data);
+      const image = data.image[0];
+      const imageData = await imageUpload(image);
 
-    // create user entry in the database
-    const userInfo = {
-      fullName: data.name,
-      email: data.email,
-      password: data.password,
-      image: imageData?.data?.display_url,
-    };
-    console.log(userInfo);
-  };   
+      // create user entry in the database
+      const userInfo = {
+        name: data.name,
+        email: data.email,
+        password: data.password,
+        image: imageData?.data?.display_url,
+      };
+      console.log(userInfo);
+
+      const response = await axiosLocal.post("/signup", userInfo);
+      if(response.data.insertId > 0){
+        toast.success("Registration successfully")
+      }
+      console.log(response.data);
+    } catch (error) {
+      console.log("Error", error);
+    }
+  };
 
   return (
     <div>
