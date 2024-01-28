@@ -8,7 +8,7 @@ const Login = () => {
 
   const {
     register,
-    // reset,
+    reset,
     handleSubmit,
     formState: { errors },
   } = useForm();
@@ -23,8 +23,14 @@ const Login = () => {
       };
       console.log(userInfo);
       const res = await axiosLocal.post("/login", userInfo);
-      if (res?.data === "Success") {
+      if (res?.data.Login) {
+        reset()
         toast.success("Login Successfully ");
+     
+        if(res?.data?.token){
+          localStorage.setItem("user:token", res?.data?.token)
+          localStorage.setItem("user:details", JSON.stringify(res?.data?.user))
+        }
       } else {
         toast.error("Invalid user");
       }

@@ -1,15 +1,16 @@
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { imageUpload } from "../../Utils/Utils";
 import useAxiosLocal from "../../hooks/useAxiosLocal";
 import { toast } from "react-hot-toast";
 
 const Register = () => {
   const axiosLocal = useAxiosLocal();
+  const navigate = useNavigate()
 
   const {
     register,
-    // reset,
+    reset,
     handleSubmit,
     formState: { errors },
   } = useForm();
@@ -31,7 +32,9 @@ const Register = () => {
 
       const response = await axiosLocal.post("/signup", userInfo);
       if(response.data.insertId > 0){
+        reset()
         toast.success("Registration successfully")
+        navigate("/")
       }
       console.log(response.data);
     } catch (error) {
