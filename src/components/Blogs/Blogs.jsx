@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import useAxiosLocal from "../../hooks/useAxiosLocal";
 import { Link } from "react-router-dom";
+import { toast } from "react-hot-toast";
 
 const Blogs = () => {
   const axiosLocal = useAxiosLocal();
@@ -16,6 +17,22 @@ const Blogs = () => {
         console.log("Error", err);
       });
   }, [axiosLocal]);
+
+  const handleFavorite = async (blog) => {
+    try {
+      console.log({ blog });
+
+      const response = await axiosLocal.post("/favorite", blog);
+      if (response.data.insertId > 0) {
+        toast.success("Favorited successfully");
+      } else {
+        toast.error("Already Added");
+      }
+      console.log(response.data);
+    } catch (error) {
+      console.log("Error", error);
+    }
+  };
 
   return (
     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mx-16 mt-5">
@@ -35,9 +52,15 @@ const Blogs = () => {
                 )}{" "}
               </p>
 
-              <Link to={`/blog_details/${blog?.id}`}>
-                <button className="btn">View Details</button>
-              </Link>
+              <div className="flex justify-between">
+                <Link to={`/blog_details/${blog?.id}`}>
+                  <button className="btn">View Details</button>
+                </Link>
+
+                <button onClick={() => handleFavorite(blog)} className="btn">
+                  Favorite
+                </button>
+              </div>
             </div>
           </div>
         </div>

@@ -20,6 +20,14 @@ const NavbarLinks = () => {
         Add Blog
       </NavLink>
       <NavLink
+        to="/favorite"
+        className={({ isActive, isPending }) =>
+          isPending ? "pending" : isActive ? "text-[#006ce1]  border-b" : ""
+        }
+      >
+        Favorite
+      </NavLink>
+      <NavLink
         to="/login"
         className={({ isActive, isPending }) =>
           isPending ? "pending" : isActive ? "text-[#006ce1]  border-b" : ""

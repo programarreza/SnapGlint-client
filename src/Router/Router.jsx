@@ -6,6 +6,7 @@ import Blog_update from "../Pages/Blog_update/Blog_update";
 import Home from "../Pages/Home/Home";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
+import Favorite from "../Pages/Favorite/Favorite";
 
 const Router = createBrowserRouter([
   {
@@ -36,6 +37,10 @@ const Router = createBrowserRouter([
         path: "blog_update/:id",
         element: <Blog_update />,
       },
+      {
+        path: "favorite",
+        element: <Favorite/>
+      }
     ],
   },
 ]);
