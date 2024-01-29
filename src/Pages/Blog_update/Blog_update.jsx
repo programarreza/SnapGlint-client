@@ -51,13 +51,13 @@ const Blog_update = () => {
 
   return (
     <div>
-      <div className="w-full min-h-screen flex bg-cover bg-center">
+      <div className="w-full min-h-screen flex bg-cover bg-center bg-slate-100">
         <div className="hero">
           <div className="hero-content flex flex-col md:flex-row  rounded-xl justify-between">
             <div className="card w-1/1  flex-shrink-0 shadow-2xl">
               <form
                 onSubmit={handleSubmit(onSubmit)}
-                className="card-body md:px-16"
+                className="card-body  md:px-16 bg-white rounded-md"
               >
                 <h2 className="text-center text-3xl font-bold mt-5">
                   Update Blog

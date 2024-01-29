@@ -42,21 +42,30 @@ const Blogs = () => {
               <img src={blog?.image} alt="blog" className="w-full h-[200px]" />
             </figure>
             <div className="card-body">
-              <h2 className="card-title">{blog?.title}</h2>
-              <p>
+              <h2 className="card-title">
+                {blog?.title?.length > 35 ? (
+                  <p>{blog?.title.slice(0, 30)}</p>
+                ) : (
+                  <p>{blog?.title}</p>
+                )}{" "}
+              </h2>
+              <h3>
                 {blog?.description.length > 150 ? (
-                  <p>{blog?.description.slice(0, 150)}</p>
+                  <p>{blog?.description.slice(0, 140)}...</p>
                 ) : (
                   <p>{blog?.description}</p>
                 )}{" "}
-              </p>
+              </h3>
 
               <div className="flex justify-between">
                 <Link to={`/blog_details/${blog?.id}`}>
                   <button className="btn btn-sm">View Details</button>
                 </Link>
                 {user ? (
-                  <button onClick={() => handleFavorite(blog)} className="btn btn-sm">
+                  <button
+                    onClick={() => handleFavorite(blog)}
+                    className="btn btn-sm"
+                  >
                     Favorite
                   </button>
                 ) : (

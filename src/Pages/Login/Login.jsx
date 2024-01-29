@@ -2,10 +2,13 @@ import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import useAxiosLocal from "../../hooks/useAxiosLocal";
 import toast from "react-hot-toast";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { useState } from "react";
 
 const Login = () => {
   const axiosLocal = useAxiosLocal();
   const navigate = useNavigate();
+  const [isShow, setIsShow] = useState(true);
 
   const {
     register,
@@ -49,7 +52,7 @@ const Login = () => {
             <div className="card w-1/1  flex-shrink-0 shadow-2xl">
               <form
                 onSubmit={handleSubmit(onSubmit)}
-                className="card-body w-[450px] px-16 bg-white rounded-md"
+                className="card-body w-[380px] md:w-[450px] md:px-16 bg-white rounded-md"
               >
                 <h2 className="text-center text-3xl font-bold mt-5">Login</h2>
 
@@ -68,14 +71,14 @@ const Login = () => {
                 <div className="form-control">
                   <label className="label"></label>
                   <input
-                    type="password"
+                    type={isShow ? "password" : "text"}
                     {...register("password", {
                       required: true,
                       minLength: 6,
                       maxLength: 20,
                     })}
                     placeholder="Password"
-                    className="input input-bordered h-10 mb-2 mr-5"
+                    className="input input-bordered h-10 mb-2 mr-5 relative"
                   />
 
                   {errors.password?.type === "required" && (
@@ -97,12 +100,23 @@ const Login = () => {
                       number and one special character
                     </p>
                   )}
+
+                  <p
+                    onClick={() => setIsShow(!isShow)}
+                    className="text-xl absolute cursor-pointer mt-7 ml-[270px]"
+                  >
+                    {isShow ? (
+                      <FaEyeSlash className="text-black" />
+                    ) : (
+                      <FaEye className="text-black" />
+                    )}
+                  </p>
                 </div>
 
                 <div className="form-control mt-2">
                   <button
                     type="submit"
-                    className="btn   bg-[#61adff] hover:bg-[#006ce1] text-white  "
+                    className="btn mr-5 bg-[#61adff] hover:bg-[#006ce1] text-white  "
                   >
                     Login In
                   </button>

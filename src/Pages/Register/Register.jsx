@@ -3,10 +3,15 @@ import { Link, useNavigate } from "react-router-dom";
 import { imageUpload } from "../../Utils/Utils";
 import useAxiosLocal from "../../hooks/useAxiosLocal";
 import { toast } from "react-hot-toast";
+import { useState } from "react";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+
 
 const Register = () => {
   const axiosLocal = useAxiosLocal();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const [isShow, setIsShow] = useState(true);
+
 
   const {
     register,
@@ -31,10 +36,10 @@ const Register = () => {
       console.log(userInfo);
 
       const response = await axiosLocal.post("/signup", userInfo);
-      if(response.data.insertId > 0){
-        reset()
-        toast.success("Registration successfully")
-        navigate("/login")
+      if (response.data.insertId > 0) {
+        reset();
+        toast.success("Registration successfully");
+        navigate("/login");
       }
       console.log(response.data);
     } catch (error) {
@@ -50,7 +55,7 @@ const Register = () => {
             <div className="card w-1/1  flex-shrink-0 shadow-2xl">
               <form
                 onSubmit={handleSubmit(onSubmit)}
-                className="card-body w-[450px] px-16 bg-white rounded-md"
+                className="card-body w-[380px] md:w-[450px] md:px-16 bg-white rounded-md"
               >
                 <h2 className="text-center text-3xl font-bold mt-5">Sign Up</h2>
                 <div className="form-control">
@@ -81,17 +86,17 @@ const Register = () => {
                 <div className="form-control">
                   <label className="label"></label>
                   <input
-                    type="password"
+                    type={isShow ? "password" : "text"}
                     {...register("password", {
                       required: true,
                       minLength: 6,
                       maxLength: 20,
                       // TODO: uncomment this validation
-                      // pattern:
-                      //   /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z]).{8}/,
+                      pattern:
+                        /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z]).{8}/,
                     })}
                     placeholder="Password"
-                    className="input input-bordered h-10 mb-2 mr-5"
+                    className="input input-bordered h-10 mb-2 mr-5 relative"
                   />
 
                   {errors.password?.type === "required" && (
@@ -113,6 +118,16 @@ const Register = () => {
                       number and one special character
                     </p>
                   )}
+                  <p
+                    onClick={() => setIsShow(!isShow)}
+                    className="text-xl absolute cursor-pointer mt-7 ml-[270px]"
+                  >
+                    {isShow ? (
+                      <FaEyeSlash className="text-black" />
+                    ) : (
+                      <FaEye className="text-black" />
+                    )}
+                  </p>
                 </div>
 
                 <div>
@@ -131,7 +146,7 @@ const Register = () => {
                 <div className="form-control mt-2">
                   <button
                     type="submit"
-                    className="btn   bg-[#61adff] hover:bg-[#006ce1] text-white  "
+                    className="btn  mr-5 bg-[#61adff] hover:bg-[#006ce1] text-white  "
                   >
                     Sign Up
                   </button>

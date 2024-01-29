@@ -7,6 +7,7 @@ import Home from "../Pages/Home/Home";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
 import Favorite from "../Pages/Favorite/Favorite";
+import PrivateRoutes from "./PrivateRoute";
 
 const Router = createBrowserRouter([
   {
@@ -31,7 +32,7 @@ const Router = createBrowserRouter([
       },
       {
         path: "blog_details/:id",
-        element: <BlogDetails />,
+        element: <PrivateRoutes><BlogDetails /></PrivateRoutes>,
       },
       {
         path: "blog_update/:id",
