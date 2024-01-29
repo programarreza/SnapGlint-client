@@ -17,7 +17,7 @@ console.log(favorites);
   }, []);
 
   return (
-	<div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mx-16 mt-5">
+	<div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 px-3 md:px-6 xl:px-16 pt-5 pb-12 bg-slate-100">
       {favorites.map((favorite, i) => (
         <div key={i}>
           <div className="card card-compact bg-base-100 shadow-xl">
@@ -34,14 +34,11 @@ console.log(favorites);
                 )}{" "}
               </p>
 
-              <div className="flex justify-between">
+              <div className="">
                 <Link to={`/blog_details/${favorite?.id}`}>
-                  <button className="btn">View Details</button>
+                  <button className="btn w-full">View Details</button>
                 </Link>
 
-                {/* <button onClick={() => handleFavorite(blog)} className="btn">
-                  Favorite
-                </button> */}
               </div>
             </div>
           </div>

@@ -22,22 +22,19 @@ const Blogs = () => {
 
   const handleFavorite = async (blog) => {
     try {
-      console.log({ blog });
-
       const response = await axiosLocal.post("/favorite", blog);
       if (response.data.insertId > 0) {
         toast.success("Favorited successfully");
       } else {
         toast.error("Already Added");
       }
-      console.log(response.data);
     } catch (error) {
       console.log("Error", error);
     }
   };
 
   return (
-    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mx-16 mt-5">
+    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 px-3 md:px-6 xl:px-16 pt-5 pb-12 bg-slate-100">
       {blogs.map((blog, i) => (
         <div key={i}>
           <div className="card card-compact bg-base-100 shadow-xl">

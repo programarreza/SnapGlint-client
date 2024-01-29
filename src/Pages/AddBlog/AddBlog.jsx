@@ -46,25 +46,25 @@ const AddBlog = () => {
 
   return (
     <div>
-      <div className="w-full min-h-screen flex bg-cover bg-center">
+      <div className="w-full min-h-screen flex bg-cover bg-center bg-slate-100">
         <div className="hero">
           <div className="hero-content flex flex-col md:flex-row  rounded-xl justify-between">
             <div className="card w-1/1  flex-shrink-0 shadow-2xl">
               <form
                 onSubmit={handleSubmit(onSubmit)}
-                className="card-body px-16"
+                className="card-body md:px-16 bg-white rounded-md"
               >
                 <h2 className="text-center text-3xl font-bold mt-5">
                   Add Blog
                 </h2>
-                <div className="flex items-center">
+                <div className="grid  md:grid-cols-2 gap-3 items-center">
                   <div className="form-control">
                     <label className="label"></label>
                     <input
                       type="text"
                       {...register("title", { required: true })}
                       placeholder="Title"
-                      className="input input-bordered h-10 mr-5"
+                      className="input input-bordered h-10 "
                     />
                     {errors.name && (
                       <span className="text-[#006ce1]">Title is required</span>

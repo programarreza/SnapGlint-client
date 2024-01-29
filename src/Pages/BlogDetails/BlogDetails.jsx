@@ -50,10 +50,10 @@ const BlogDetails = () => {
   };
 
   return (
-    <div className="w-full px-44 mx-auto">
-      <div className="card card-compact bg-base-100 shadow-xl">
+    <div className="w-full px-2 md:px-6 lg:px-16 xl:px-44 mx-auto bg-slate-100">
+      <div className="card card-compact bg-base-100 rounded-t-lg">
         <figure>
-          <img src={blog[0]?.image} alt="blog" className="w-full h-[400px]" />
+          <img src={blog[0]?.image} alt="blog" className="w-full h-[250px] md:h-[400px]" />
         </figure>
         <div className="card-body">
           <div className="flex items-center justify-between">

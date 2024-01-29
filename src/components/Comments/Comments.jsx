@@ -65,9 +65,9 @@ const Comments = ({ id }) => {
           </button>
         )}
 
-        <div className="shadow-2xl">
+        <div className="shadow-md">
           {comments?.map((comment, i) => (
-            <div key={i} className="p-4 mb-4">
+            <div key={i} className="p-4 mb-4 border rounded-md">
               {/* user profile */}
               <div className="flex gap-2 mt-4 py-2">
                 <div className="avatar">

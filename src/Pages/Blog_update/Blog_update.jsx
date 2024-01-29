@@ -57,12 +57,12 @@ const Blog_update = () => {
             <div className="card w-1/1  flex-shrink-0 shadow-2xl">
               <form
                 onSubmit={handleSubmit(onSubmit)}
-                className="card-body px-16"
+                className="card-body md:px-16"
               >
                 <h2 className="text-center text-3xl font-bold mt-5">
                   Update Blog
                 </h2>
-                <div className="flex items-center">
+                <div className="grid  md:grid-cols-2 gap-3 items-center">
                   <div className="form-control">
                     <label className="label"></label>
                     <input
@@ -70,7 +70,7 @@ const Blog_update = () => {
                       defaultValue={blog[0]?.title}
                       {...register("title", { required: true })}
                       placeholder="Title"
-                      className="input input-bordered h-10 mr-5"
+                      className="input input-bordered h-10"
                     />
                     {errors.name && (
                       <span className="text-[#006ce1]">Title is required</span>
