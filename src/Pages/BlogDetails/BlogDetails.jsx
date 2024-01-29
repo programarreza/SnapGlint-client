@@ -56,16 +56,22 @@ const BlogDetails = () => {
           <img src={blog[0]?.image} alt="blog" className="w-full h-[400px]" />
         </figure>
         <div className="card-body">
-          <h2 className="card-title">{blog[0]?.title}</h2>
-          <p>{blog[0]?.description}</p>
-          <div className="card-actions justify-end">
-            <button onClick={() => handleDelete(blog[0]?.id)} className="btn">
-              Delete
-            </button>
-            <Link to={`/blog_update/${blog[0]?.id}`} className="btn ">
-              Update
-            </Link>
+          <div className="flex items-center justify-between">
+            <h2 className="card-title">{blog[0]?.title}</h2>
+            <div className="card-actions justify-end">
+              <button
+                onClick={() => handleDelete(blog[0]?.id)}
+                className="btn btn-sm"
+              >
+                Delete
+              </button>
+              <Link to={`/blog_update/${blog[0]?.id}`} className="btn btn-sm">
+                Update
+              </Link>
+            </div>
           </div>
+
+          <p>{blog[0]?.description}</p>
 
           {/* Comments  */}
           <div>

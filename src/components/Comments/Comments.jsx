@@ -1,24 +1,20 @@
-import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import { axiosLocal } from "../../hooks/useAxiosLocal";
 
 // eslint-disable-next-line react/prop-types
 const Comments = ({ id }) => {
   const { user } = useAuth();
-  const [comments, setComments] = useState([]);
-  const [newComment, setNewComment] = useState();
+  const [newComment, setNewComment] = useState("");
 
-  useEffect(() => {
-    axiosLocal
-      .get(`/comments/${id}`)
-      .then((res) => {
-        console.log(32, res.data);
-        setComments(res?.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, [id]);
+  const { data: comments, refetch } = useQuery({
+    queryKey: ["comments"],
+    queryFn: async () => {
+      const response = await axiosLocal.get(`/comments/${id}`);
+      return response.data;
+    },
+  });
 
   const handleComment = async (blogId) => {
     try {
@@ -32,6 +28,7 @@ const Comments = ({ id }) => {
       };
       const res = await axiosLocal.post("/comment", commentInfo);
       if (res?.data?.insertId > 0) {
+        refetch();
         setNewComment("");
         console.log(res.data);
       }
@@ -44,12 +41,13 @@ const Comments = ({ id }) => {
     <div>
       {/* message  */}
       <div>
-        <h2 className="mb-2">Comments ( {comments?.length} )</h2>
+        <h2 className=" text-lg font-semibold">Comments ( {comments?.length} )</h2>
 
-        <div className="w-full mt-4">
+        <div className="w-full mt-2">
           <textarea
             className="w-full border rounded-md p-4"
             onChange={(e) => setNewComment(e.target.value)}
+			value={newComment}
             id="comment"
             placeholder="Comment Now"
             required
