@@ -2,7 +2,7 @@ import { useState } from "react";
 import useAuth from "../../hooks/useAuth";
 
 const DropDown = () => {
-  const {user} = useAuth()
+  const {user, logout} = useAuth()
   const [isShow, setIsShow] = useState(false);
   
   return (
@@ -33,7 +33,7 @@ const DropDown = () => {
           </li>
 
           <li>
-            <p>logout coming soon</p>
+            <p onClick={logout}>Log Out</p>
           </li>
         </ul>
       ) : (

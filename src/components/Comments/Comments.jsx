@@ -18,7 +18,6 @@ const Comments = ({ id }) => {
 
   const handleComment = async (blogId) => {
     try {
-      console.log(blogId);
       const commentInfo = {
         blogId: blogId,
         name: user?.name,
@@ -30,7 +29,6 @@ const Comments = ({ id }) => {
       if (res?.data?.insertId > 0) {
         refetch();
         setNewComment("");
-        console.log(res.data);
       }
     } catch (error) {
       console.log(error);
@@ -41,13 +39,15 @@ const Comments = ({ id }) => {
     <div>
       {/* message  */}
       <div>
-        <h2 className=" text-lg font-semibold">Comments ( {comments?.length} )</h2>
+        <h2 className=" text-lg font-semibold">
+          Comments ( {comments?.length} )
+        </h2>
 
         <div className="w-full mt-2">
           <textarea
             className="w-full border rounded-md p-4"
             onChange={(e) => setNewComment(e.target.value)}
-			value={newComment}
+            value={newComment}
             id="comment"
             placeholder="Comment Now"
             required

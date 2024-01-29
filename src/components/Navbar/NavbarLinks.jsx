@@ -1,9 +1,11 @@
 import { NavLink } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
 
 const NavbarLinks = () => {
+  const {user} = useAuth()
   return (
     <div className="flex flex-col  md:flex-row gap-4 font-semibold text-lg ">
-      <NavLink
+      {user ? <><NavLink
         to="/"
         className={({ isActive, isPending }) =>
           isPending ? "pending" : isActive ? "text-[#006ce1]  border-b" : ""
@@ -26,7 +28,15 @@ const NavbarLinks = () => {
         }
       >
         Favorite
+      </NavLink></>: <><NavLink
+        to="/"
+        className={({ isActive, isPending }) =>
+          isPending ? "pending" : isActive ? "text-[#006ce1]  border-b" : ""
+        }
+      >
+        Home
       </NavLink>
+
       <NavLink
         to="/login"
         className={({ isActive, isPending }) =>
@@ -43,6 +53,9 @@ const NavbarLinks = () => {
       >
         Register
       </NavLink>
+      
+      </>}
+      
     </div>
   );
 };

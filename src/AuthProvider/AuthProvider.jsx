@@ -6,8 +6,14 @@ const AuthProvider = ({ children }) => {
     JSON.parse(localStorage.getItem("user:details"))
   );
 
+  const logout = () => {
+    setUser(null);
+    localStorage.removeItem("user:details")
+  };
+
   const authInfo = {
     user,
+    logout
   };
 
   return (

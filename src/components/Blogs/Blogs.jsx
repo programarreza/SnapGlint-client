@@ -2,10 +2,12 @@ import { useEffect, useState } from "react";
 import useAxiosLocal from "../../hooks/useAxiosLocal";
 import { Link } from "react-router-dom";
 import { toast } from "react-hot-toast";
+import useAuth from "../../hooks/useAuth";
 
 const Blogs = () => {
   const axiosLocal = useAxiosLocal();
   const [blogs, setBlogs] = useState([]);
+  const { user } = useAuth();
 
   useEffect(() => {
     axiosLocal
@@ -40,7 +42,7 @@ const Blogs = () => {
         <div key={i}>
           <div className="card card-compact bg-base-100 shadow-xl">
             <figure>
-              <img src={blog?.image} alt="blog" className="w-full h-[250px]" />
+              <img src={blog?.image} alt="blog" className="w-full h-[200px]" />
             </figure>
             <div className="card-body">
               <h2 className="card-title">{blog?.title}</h2>
@@ -54,12 +56,15 @@ const Blogs = () => {
 
               <div className="flex justify-between">
                 <Link to={`/blog_details/${blog?.id}`}>
-                  <button className="btn">View Details</button>
+                  <button className="btn btn-sm">View Details</button>
                 </Link>
-
-                <button onClick={() => handleFavorite(blog)} className="btn">
-                  Favorite
-                </button>
+                {user ? (
+                  <button onClick={() => handleFavorite(blog)} className="btn btn-sm">
+                    Favorite
+                  </button>
+                ) : (
+                  ""
+                )}
               </div>
             </div>
           </div>
