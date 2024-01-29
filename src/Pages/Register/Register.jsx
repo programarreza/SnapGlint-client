@@ -34,7 +34,7 @@ const Register = () => {
       if(response.data.insertId > 0){
         reset()
         toast.success("Registration successfully")
-        navigate("/")
+        navigate("/login")
       }
       console.log(response.data);
     } catch (error) {

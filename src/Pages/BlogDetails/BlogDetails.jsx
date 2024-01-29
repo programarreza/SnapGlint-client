@@ -2,6 +2,7 @@ import Swal from "sweetalert2";
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import useAxiosLocal from "../../hooks/useAxiosLocal";
+import Comments from "../../components/Comments/Comments";
 
 const BlogDetails = () => {
   const { id } = useParams();
@@ -28,6 +29,7 @@ const BlogDetails = () => {
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes",
+      // eslint-disable-next-line no-dupe-keys
       customClass: {
         popup: "w-[300px]",
       },
@@ -63,6 +65,11 @@ const BlogDetails = () => {
             <Link to={`/blog_update/${blog[0]?.id}`} className="btn ">
               Update
             </Link>
+          </div>
+
+          {/* Comments  */}
+          <div>
+            <Comments id={id} />
           </div>
         </div>
       </div>

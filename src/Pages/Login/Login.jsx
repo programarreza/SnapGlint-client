@@ -1,10 +1,11 @@
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useAxiosLocal from "../../hooks/useAxiosLocal";
 import toast from "react-hot-toast";
 
 const Login = () => {
   const axiosLocal = useAxiosLocal();
+  const navigate = useNavigate();
 
   const {
     register,
@@ -24,12 +25,13 @@ const Login = () => {
       console.log(userInfo);
       const res = await axiosLocal.post("/login", userInfo);
       if (res?.data.Login) {
-        reset()
+        reset();
+        navigate("/");
         toast.success("Login Successfully ");
-     
-        if(res?.data?.token){
-          localStorage.setItem("user:token", res?.data?.token)
-          localStorage.setItem("user:details", JSON.stringify(res?.data?.user))
+
+        if (res?.data?.token) {
+          localStorage.setItem("user:token", res?.data?.token);
+          localStorage.setItem("user:details", JSON.stringify(res?.data?.user));
         }
       } else {
         toast.error("Invalid user");
