@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const axiosLocal = axios.create({
-  baseURL: "http://localhost:8081",
+  baseURL: "https://snapglint.onrender.com",
 });
 const useAxiosLocal = () => {
   return axiosLocal;
